@@ -17,11 +17,11 @@ namespace Uplift.Controllers
     [Area("Customer")]
     public class HomeController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ApplicationDBContext _unitOfWork;
         private HomeVM HmVM;
 
 
-        public HomeController(IUnitOfWork unitOfWork)
+        public HomeController(ApplicationDBContext unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

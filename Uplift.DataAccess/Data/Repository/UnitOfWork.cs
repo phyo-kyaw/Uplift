@@ -5,7 +5,7 @@ using Uplift.DataAccess.Data.Repository.IRepository;
 
 namespace Uplift.DataAccess.Data.Repository
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : ApplicationDBContext
     {
         private readonly ApplicationDbContext _db;
 
@@ -17,6 +17,8 @@ namespace Uplift.DataAccess.Data.Repository
             Service = new ServiceRepository(_db);
             OrderHeader = new OrderHeaderRepository(_db);
             OrderDetails = new OrderDetailsRepository(_db);
+            User = new UserRepository(_db);
+            SP_Call = new SP_Call(_db);
         }
 
         public ICategoryRepository Category { get; set; }
@@ -24,6 +26,8 @@ namespace Uplift.DataAccess.Data.Repository
         public IServiceRepository Service { get; set; }
         public IOrderHeaderRepository OrderHeader { get; set; }
         public IOrderDetailsRepository OrderDetails { get; set; }
+        public IUserRepository User { get; set; }
+        public ISP_Call SP_Call { get; set; }
 
         public void Dispose()
         {

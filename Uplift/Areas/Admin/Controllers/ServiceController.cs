@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,16 @@ using Uplift.Models.ViewModels;
 namespace Uplift.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ServiceController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ApplicationDBContext _unitOfWork;
         private readonly IWebHostEnvironment _hostEnviroment;
 
         [BindProperty]
         public ServiceVM ServVM { get; set; }
 
-        public ServiceController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
+        public ServiceController(ApplicationDBContext unitOfWork, IWebHostEnvironment hostEnvironment)
         {
             _unitOfWork = unitOfWork;
             _hostEnviroment = hostEnvironment;

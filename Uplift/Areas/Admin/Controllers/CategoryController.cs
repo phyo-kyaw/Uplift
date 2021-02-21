@@ -1,19 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Uplift.DataAccess.Data.Repository.IRepository;
 using Uplift.Models;
+using Uplift.Utility;
 
 namespace Uplift.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class CategoryController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ApplicationDBContext _unitOfWork;
 
-        public CategoryController(IUnitOfWork unitOfWork)
+        public CategoryController(ApplicationDBContext unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -63,7 +66,10 @@ namespace Uplift.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Json(new { data = _unitOfWork.Category.GetAll() });
+            //origin
+            //return Json(new { data = _unitOfWork.Category.GetAll() });
+
+            return Json(new { data = _unitOfWork.SP_Call.ReturnList<Category>(SD.usp_GetAllCategory, null) });
         }
 
 

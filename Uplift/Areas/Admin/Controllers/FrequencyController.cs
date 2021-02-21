@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,13 @@ using Uplift.Models;
 namespace Uplift.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class FrequencyController : Controller
     {
 
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ApplicationDBContext _unitOfWork;
 
-        public FrequencyController(IUnitOfWork unitOfWork)
+        public FrequencyController(ApplicationDBContext unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

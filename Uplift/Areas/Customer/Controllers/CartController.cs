@@ -15,11 +15,11 @@ namespace Uplift.Areas.Customer.Controllers
     [Area("Customer")]
     public class CartController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ApplicationDBContext _unitOfWork;
 
         [BindProperty]
         public CartVM Cart_VM { get; set; }
-        public CartController(IUnitOfWork unitOfWork)
+        public CartController(ApplicationDBContext unitOfWork)
         {
             _unitOfWork = unitOfWork;
             Cart_VM = new CartVM()
